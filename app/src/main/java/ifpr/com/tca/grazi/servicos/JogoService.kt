@@ -9,7 +9,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
-interface JogoService : PerguntaService {
+interface JogoService {
 
     @Headers("Accept: application/json")
     @FormUrlEncoded
@@ -17,18 +17,14 @@ interface JogoService : PerguntaService {
     fun cadastrar(
         @Field("nome") nome: String,
         @Field("email") email: String,
-        @Field("senha") senha: String,
-        @Field("confirmarsenha") confirmarsenha: String
-    ): Call<ResultadoRegistro>
+        @Field("senha") senha: String): Call<ResultadoRegistro>
 
     @Headers("Accept: application/json")
-
-
     @FormUrlEncoded
     @POST("usuario/login")
     fun login(
         @Field("email") email: String,
-        @Field("senha") senha: String): Call <ResultadoLogin>
+        @Field("senha") senha: String): Call<ResultadoLogin>
 
 
 
