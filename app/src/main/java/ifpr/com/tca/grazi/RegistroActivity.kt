@@ -71,6 +71,7 @@ class RegistroActivity : AppCompatActivity() {
                 .baseUrl(" https://tads2019-todo-list.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+
             jogoService = retrofitUsuario.create(JogoService::class.java)
         }
 

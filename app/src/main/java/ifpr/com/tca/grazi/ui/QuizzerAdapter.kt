@@ -1,27 +1,26 @@
 package ifpr.com.tca.grazi.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
+import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_config.view.*
 import ifpr.com.tca.grazi.R
-import ifpr.com.tca.grazi.entidades.Categoria
-import java.text.SimpleDateFormat
 
-class QuizzerAdapter (
-    private var categorias: MutableList<Categoria>): RecyclerView.Adapter<QuizzerAdapter.NoticiaViewHolder>(){
+class QuizzerAdapter(
+    private var categorias: RecyclerView
+): RecyclerView.Adapter<QuizzerAdapter.QuizViewHolder>(){
 
 
-        override fun onBindViewHolder(holder: QuizzerAdapter.NoticiaViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: QuizzerAdapter.QuizViewHolder, position: Int) {
             holder.preencherView(categorias[position])
         }
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-                NoticiaViewHolder(
+                QuizViewHolder(
                     LayoutInflater
                         .from(parent.context)
                         .inflate(R.layout.activity_config, parent, false)
@@ -32,9 +31,11 @@ class QuizzerAdapter (
 
 
 
-        inner class NoticiaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            fun preencherView(categoria: Categoria) {
+        inner class QuizViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            fun preencherView(categoria: View) {
 
+
+                  itemView.nome.setText(categoria)
 //                itemView.lbTitulo.setText(noticia.titulo)
 //                itemView.lbDescricao.setText(noticia.descricao)
 //                itemView.lbConteudo.setText(noticia.conteudo)

@@ -1,6 +1,10 @@
 package ifpr.com.tca.grazi.entidades
 
+import com.google.gson.annotations.SerializedName
+
 class Categoria (
+
     var id: Int,
-    var name: String
+    @SerializedName("name")
+    var nome : String
 )
