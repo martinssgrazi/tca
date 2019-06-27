@@ -8,7 +8,7 @@ import android.util.Log
 import ifpr.com.tca.grazi.entidades.ResultadoRegistro
 import ifpr.com.tca.grazi.servicos.JogoService
 import ifpr.com.tca.grazi.servicos.PerguntaService
-import ifpr.com.tca.grazi.ui.QuizzerAdapter
+import ifpr.com.tca.grazi.ui.CategoriaAdapter
 import kotlinx.android.synthetic.main.activity_registro.*
 import org.jetbrains.anko.toast
 import retrofit2.Call
@@ -23,7 +23,7 @@ class RegistroActivity : AppCompatActivity() {
         lateinit var retrofit: Retrofit
         lateinit var perguntaService: PerguntaService
         lateinit var jogoService: JogoService
-        lateinit var adapter: QuizzerAdapter
+        lateinit var adapter: CategoriaAdapter
         lateinit var prefs: SharedPreferences
 
         override fun onCreate(savedInstanceState: Bundle?) {

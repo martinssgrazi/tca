@@ -1,26 +1,22 @@
 package ifpr.com.tca.grazi.servicos
 
 import ifpr.com.tca.grazi.entidades.Pergunta
+import ifpr.com.tca.grazi.entidades.ResultadoCategoria
 import retrofit2.Call
 import retrofit2.http.*
 
 interface PerguntaService {
     @Headers("Accept: application/json")
-
-//    fun buscaTodas(): Call<List<Tarefa>>
-
     @FormUrlEncoded
-    @GET("amount=1")
-    fun pergunta(
-        @Field("amount") questao: Int,
-        @Field("category") categoria: Int,
-        @Field("difficulty") dificuldade: String): Call<Pergunta>
+    @GET("api.php")
+    fun buscaPerguntas(
+        @Field("difficulty") dificuldade: String,
+        @Field("category") categoria: Int? = null,
+        @Field("amount") quantidade: Int = 1): Call<Pergunta>
 
-
+    @Headers("Accept: application/json")
     @GET("api_category.php")
-    fun categoria(
-        @Field("category[id]") id: String,
-        @Field("category[name]") nome: String): Call <Pergunta>
+    fun buscaCategorias(): Call <ResultadoCategoria>
 
 
 }
