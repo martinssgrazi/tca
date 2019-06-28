@@ -13,6 +13,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import android.os.CountDownTimer
+
+
 
 class JogoActivity : AppCompatActivity() {
 
@@ -30,14 +33,14 @@ class JogoActivity : AppCompatActivity() {
         categoriaId = prefs.getInt("categoria", 0)
 
         configuraRetrofit()
-        carregarCategorias()
-
+        carregarPerguntas()
+        tempo()
 
 
 
     }
 
-    private fun carregarCategorias() {
+    private fun carregarPerguntas() {
 
         perguntaService.buscaPerguntas(dificuldade, categoriaId).enqueue(object : Callback<ResultadoPergunta> {
             override fun onFailure(call: Call<ResultadoPergunta>, t: Throwable) {
@@ -46,14 +49,39 @@ class JogoActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ResultadoPergunta>, response: Response<ResultadoPergunta>) {
                 val perguntas = response.body()?.perguntas!![0]
-                perguntas.questao = txtPergunta.text.toString()
-//                perguntas?.respostaCorreta = txtResposta.text.toString()
-//                perguntas?.respostaIncorreta = listOf(txtResposta.text.toString())
-
+                txtPergunta.text = perguntas.questao
+//                perguntas.respostaIncorreta[0]
+//                perguntas.respostaIncorreta[1]
+//                perguntas.respostaIncorreta[2]
+//                perguntas.respostaCorreta
+////                perguntas?.respostaCorreta = txtResposta.text.toString()
+////                perguntas?.respostaIncorreta = listOf(txtResposta.text.toString())
+////                configuraRecyclerView()
+////                    var list = listOf<String>(perguntas.respostaIncorreta[0],
+////                        perguntas.respostaIncorreta[1],
+////                        perguntas.respostaIncorreta[2],
+////                        perguntas.respostaCorreta)
+////                        .shuffled()
+                    btAlternativa1.text = perguntas.respostaCorreta
 
             }
 
         })
+    }
+
+
+    fun tempo(){
+        object : CountDownTimer(30000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+               tp.setText("seconds remaining: " + millisUntilFinished / 1000)
+            }
+
+            override fun onFinish() {
+                tp.setText("done!")
+
+            }
+        }.start()
     }
 
     fun configuraRetrofit() {
@@ -64,6 +92,14 @@ class JogoActivity : AppCompatActivity() {
             .build()
         perguntaService = retrofit.create(PerguntaService::class.java)
     }
+
+//    fun configuraRecyclerView(categorias: List<Categoria>) {
+//        adapter = CategoriaAdapter(categorias, this)
+//        listCategorias.adapter = adapter
+//        listCategorias.layoutManager = LinearLayoutManager(
+//            this, RecyclerView.VERTICAL, false
+//        )
+//    }
 
 
 
