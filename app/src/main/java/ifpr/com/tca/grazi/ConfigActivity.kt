@@ -38,18 +38,22 @@ class ConfigActivity : AppCompatActivity(), CategoriaListener {
         carregarCategorias()
 //        atualizaLista()
         btSalvar.setOnClickListener {
-//            Log.d("categoria", categoria?.id.toString())
+            //            Log.d("categoria", categoria?.id.toString())
 //            Log.d("categoria", categoria?.nome)
 
             val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-//            if (rgDificuldade.checkedRadioButtonId == R.id.rbFacil)
+            val dificuldade = if (rgDificuldade.checkedRadioButtonId == R.id.rbFacil)
+                "easy"
+            else if (rgDificuldade.checkedRadioButtonId == R.id.rbMedio)
+                "medium"
+            else
+                "hard"
 
             prefs.edit()
-                .putString("dificuldade", "easy")
-                .putInt("categoria", 55)
-                .commit()
-
+                .putString("dificuldade", dificuldade)
+                .putInt("categoria", categoria?.id ?: 0)
+            .commit()
 
 
             val intentExplicita = Intent(this@ConfigActivity, JogoActivity::class.java)
@@ -57,12 +61,10 @@ class ConfigActivity : AppCompatActivity(), CategoriaListener {
         }
 
 
-
-
     }
 
     private fun carregarCategorias() {
-        perguntaService.buscaCategorias().enqueue(object : Callback<ResultadoCategoria>{
+        perguntaService.buscaCategorias().enqueue(object : Callback<ResultadoCategoria> {
             override fun onFailure(call: Call<ResultadoCategoria>, t: Throwable) {
 
             }
@@ -85,7 +87,7 @@ class ConfigActivity : AppCompatActivity(), CategoriaListener {
 
 
     fun configuraRecyclerView(categorias: List<Categoria>) {
-        adapter = CategoriaAdapter(categorias, this )
+        adapter = CategoriaAdapter(categorias, this)
         listCategorias.adapter = adapter
         listCategorias.layoutManager = LinearLayoutManager(
             this, RecyclerView.VERTICAL, false
