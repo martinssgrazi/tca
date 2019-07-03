@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ifpr.com.tca.grazi.R
 import ifpr.com.tca.grazi.entidades.Resposta
-import kotlinx.android.synthetic.main.item_categoria.view.*
+import kotlinx.android.synthetic.main.activity_jogo.*
+import kotlinx.android.synthetic.main.item_resposta.textView
+import kotlinx.android.synthetic.main.item_resposta.view.*
 
 class RespostaAdapter (
     private var respostas: MutableList<Resposta>,
@@ -32,10 +34,25 @@ class RespostaAdapter (
 
     inner class RespostaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun preencherView(respostas: Resposta) {
-//            itemView.txtResposta1.text = respostaCorreta.nome
-//            itemView.txtResposta2.text = respostaIncorreta.
+//            itemView.textView.text = respostaCorreta
+//
+////                txtResposta1.text = respostaCorreta.nome
+//            itemView.textView2.text = respostaIncorreta.toString()
 
-
+//            txtPergunta.text = perguntas.questao
+//            perguntas.respostaIncorreta[0]
+//            perguntas.respostaIncorreta[1]
+//            perguntas.respostaIncorreta[2]
+//            perguntas.respostaCorreta
+//            perguntas?.respostaCorreta = txtResposta.text.toString()
+//            perguntas?.respostaIncorreta = listOf(txtResposta.text.toString())
+//
+//            var list = listOf<String>(perguntas.respostaIncorreta[0],
+//                perguntas.respostaIncorreta[1],
+//                perguntas.respostaIncorreta[2],
+//                perguntas.respostaCorreta)
+//                .shuffled()
+//                    btAlternativa1.text
 
 
             }

@@ -1,5 +1,6 @@
 package ifpr.com.tca.grazi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -14,7 +15,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.os.CountDownTimer
-
+import ifpr.com.tca.grazi.ui.CategoriaAdapter
 
 
 class JogoActivity : AppCompatActivity() {
@@ -54,15 +55,16 @@ class JogoActivity : AppCompatActivity() {
 //                perguntas.respostaIncorreta[1]
 //                perguntas.respostaIncorreta[2]
 //                perguntas.respostaCorreta
-////                perguntas?.respostaCorreta = txtResposta.text.toString()
-////                perguntas?.respostaIncorreta = listOf(txtResposta.text.toString())
-////                configuraRecyclerView()
-////                    var list = listOf<String>(perguntas.respostaIncorreta[0],
-////                        perguntas.respostaIncorreta[1],
-////                        perguntas.respostaIncorreta[2],
-////                        perguntas.respostaCorreta)
-////                        .shuffled()
+//                perguntas?.respostaCorreta = txtResposta.text.toString()
+//                perguntas?.respostaIncorreta = listOf(txtResposta.text.toString())
+//                configuraRecyclerView()
+//                    var list = listOf<String>(perguntas.respostaIncorreta[0],
+//                        perguntas.respostaIncorreta[1],
+//                        perguntas.respostaIncorreta[2],
+//                        perguntas.respostaCorreta)
+//                        .shuffled()
                     btAlternativa1.text = perguntas.respostaCorreta
+//                    btAlternativa2.text = perguntas.respostaIncorreta.toString()
 
             }
 
@@ -78,7 +80,9 @@ class JogoActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                tp.setText("done!")
+                val intentExplicita = Intent(this@JogoActivity, JogoActivity::class.java)
+                startActivity(intentExplicita)
+
 
             }
         }.start()
@@ -93,8 +97,8 @@ class JogoActivity : AppCompatActivity() {
         perguntaService = retrofit.create(PerguntaService::class.java)
     }
 
-//    fun configuraRecyclerView(categorias: List<Categoria>) {
-//        adapter = CategoriaAdapter(categorias, this)
+//    fun configuraRecyclerView(pergunta: Pergunta) {
+//        adapter = CategoriaAdapter(arrayOf(respostaIncorreta))
 //        listCategorias.adapter = adapter
 //        listCategorias.layoutManager = LinearLayoutManager(
 //            this, RecyclerView.VERTICAL, false
