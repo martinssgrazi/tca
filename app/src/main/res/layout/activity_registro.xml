@@ -11,9 +11,43 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <ImageView
+                android:layout_width="60dp"
+                android:layout_height="54dp" app:srcCompat="@drawable/ic_success"
+                android:id="@+id/btRegistrar"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                app:layout_constraintHorizontal_bias="0.597"
+                tools:ignore="VectorDrawableCompat" android:layout_marginTop="76dp"
+                app:layout_constraintTop_toBottomOf="@+id/plainRsenha"/>
+        <TextView
+                android:text="@string/login"
+                android:layout_width="93dp"
+                android:layout_height="73dp"
+                android:id="@+id/txtLogin"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/plainLogin" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.545"
+                android:background="#AB94D8" android:textSize="18sp" android:textStyle="bold"
+                android:gravity="center" android:orientation="vertical" android:layout_marginTop="28dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtNome"/>
+        <TextView
+                android:text="Nome"
+                android:layout_width="95dp"
+                android:layout_height="72dp"
+                android:id="@+id/txtNome"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp" android:layout_marginStart="16dp" android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toStartOf="@+id/plainNome" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.545"
+                android:background="#AB94D8" android:textSize="18sp" android:textStyle="bold"
+                android:gravity="center" android:orientation="vertical"/>
         <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="214dp"
+                android:layout_height="76dp"
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/plainNome" android:layout_marginTop="24dp"
@@ -21,60 +55,30 @@
                 android:layout_marginEnd="72dp" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginRight="72dp"/>
         <TextView
-                android:text="Nome"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:id="@+id/txtNome"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="68dp"
-                android:layout_marginStart="68dp" app:layout_constraintEnd_toStartOf="@+id/plainNome"
-                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                app:layout_constraintHorizontal_bias="0.0"/>
-        <TextView
-                android:text="Email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtEmail" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="68dp"
-                android:layout_marginStart="68dp" app:layout_constraintTop_toBottomOf="@+id/txtNome"
-                android:layout_marginTop="56dp"
-                app:layout_constraintEnd_toStartOf="@+id/plainRemail" android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"/>
-        <TextView
-                android:text="Senha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtSenha" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="68dp"
-                android:layout_marginStart="68dp"
-                app:layout_constraintTop_toBottomOf="@+id/txtEmail" android:layout_marginTop="56dp"
-                app:layout_constraintEnd_toStartOf="@+id/plainRsenha" android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"/>
+                android:text="@string/pass"
+                android:layout_width="96dp"
+                android:layout_height="68dp"
+                android:id="@+id/txtSenha"
+                android:background="#AB94D8" android:textSize="18sp" android:textStyle="bold" android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/plainRsenha" android:layout_marginRight="8dp"
+                android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/txtLogin"/>
         <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="211dp"
+                android:layout_height="72dp"
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/plainRemail" android:layout_marginTop="28dp"
                 app:layout_constraintTop_toBottomOf="@+id/plainNome" android:layout_marginEnd="72dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="72dp"/>
         <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="211dp"
+                android:layout_height="72dp"
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/plainRsenha" android:layout_marginTop="28dp"
                 app:layout_constraintTop_toBottomOf="@+id/plainRemail" android:layout_marginEnd="72dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="72dp"/>
-        <Button
-                android:text="Registrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btRegistrar" android:layout_marginTop="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/plainRsenha" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.592"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

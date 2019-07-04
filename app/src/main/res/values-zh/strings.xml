@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">tca</string>
+    <string name="login">Dēnglù</string>
+    <string name="user">Yònghù</string>
+    <string name="pass">Mìmǎ</string>
+    <string name="play">Wán</string>
+    <string name="rbFacil">Jiǎndān</string>
+    <string name="rbMedio">Jièzhì</string>
+    <string name="rbDificil">Yìng</string>
+    <string name="time_remaining">XingLing: %1$d</string>
+    <string name="btLater">Shāo hòu huífù</string>
+</resources>

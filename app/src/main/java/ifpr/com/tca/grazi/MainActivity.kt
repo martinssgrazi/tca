@@ -1,11 +1,14 @@
 package ifpr.com.tca.grazi
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import ifpr.com.tca.grazi.entidades.ResultadoLogin
+import ifpr.com.tca.grazi.entidades.Usuario
 import ifpr.com.tca.grazi.servicos.JogoService
 import ifpr.com.tca.grazi.servicos.PerguntaService
 import ifpr.com.tca.grazi.ui.CategoriaAdapter
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: CategoriaAdapter
     lateinit var prefs: SharedPreferences
 
+
+    @SuppressLint("ApplySharedPref")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,6 +37,13 @@ class MainActivity : AppCompatActivity() {
 
 
         btLogin.setOnClickListener {
+
+            val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+            prefs.edit()
+                .putString("usuario", "")
+                .putString("senha", "")
+                .commit()
+
 
             jogoService.login(plainLogin.text.toString(), plainSenha.text.toString()).enqueue(object : Callback<ResultadoLogin> {
                 override fun onFailure(call: Call<ResultadoLogin>, t: Throwable) {
@@ -43,6 +55,8 @@ class MainActivity : AppCompatActivity() {
                     if (resultadoLogin.sucesso) {
                         val intentExplicita = Intent(this@MainActivity, ConfigActivity::class.java)
                         startActivity(intentExplicita)
+
+
                     } else {
                         toast("E-mail ou senha inválido")
                     }

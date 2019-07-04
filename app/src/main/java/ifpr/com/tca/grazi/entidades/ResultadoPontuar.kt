@@ -1,9 +1,6 @@
 package ifpr.com.tca.grazi.entidades
 
-import kotlin.Int
-
-class ResultadoLogin (
+class ResultadoPontuar (
     var sucesso: Boolean,
     var mensagem: String,
-    var pontuacao: Int
-)
+    var pontuacao: Int)

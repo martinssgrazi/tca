@@ -1,13 +1,11 @@
 package ifpr.com.tca.grazi.servicos
 
 import ifpr.com.tca.grazi.entidades.ResultadoLogin
+import ifpr.com.tca.grazi.entidades.ResultadoPontuar
 import ifpr.com.tca.grazi.entidades.ResultadoRegistro
 import ifpr.com.tca.grazi.entidades.Usuario
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface JogoService {
 
@@ -27,6 +25,17 @@ interface JogoService {
         @Field("senha") senha: String): Call<ResultadoLogin>
 
 
+//    @Headers("Accept: application/json")
+//    @FormUrlEncoded
+//    @GET("ranking.php")
+//    fun ranking(): Call<ResultadoPontuar>
 
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @PUT("usuario/pontuacao")
+    fun pontuarJogador(
+        @Field("email") email: String,
+        @Field("senha") senha: String,
+        @Field("pontos") pontos: Int): Call <ResultadoPontuar>
 
 }

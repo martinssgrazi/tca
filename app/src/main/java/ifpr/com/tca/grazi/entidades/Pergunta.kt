@@ -16,8 +16,8 @@ class Pergunta (
     var questao: String,
     @SerializedName("correct_answer")
     var respostaCorreta: String,
-    @SerializedName("incorret_answer")
-    var respostaIncorreta: List<String>
+    @SerializedName("incorrect_answers")
+    var respostasIncorretas: List<String>
 
 )
 
