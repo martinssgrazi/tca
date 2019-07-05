@@ -1,5 +1,6 @@
 package ifpr.com.tca.grazi
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,15 +16,20 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.os.CountDownTimer
+import android.text.Html
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import ifpr.com.tca.grazi.entidades.ResultadoPontuar
+import ifpr.com.tca.grazi.entidades.bd.AppDatabase
+import ifpr.com.tca.grazi.entidades.bd.dao.PerguntaDao
 import ifpr.com.tca.grazi.servicos.JogoService
+import ifpr.com.tca.grazi.ui.PerguntaListener
 import ifpr.com.tca.grazi.ui.ResponderListener
 import ifpr.com.tca.grazi.ui.RespostaAdapter
 
 
-class JogoActivity : AppCompatActivity(), ResponderListener {
+class JogoActivity : AppCompatActivity(), ResponderListener, PerguntaListener {
 
     lateinit var adapter: RespostaAdapter
     lateinit var perguntaService: PerguntaService
@@ -33,6 +39,10 @@ class JogoActivity : AppCompatActivity(), ResponderListener {
     var categoriaId = 0
     lateinit var pergunta: Pergunta
     lateinit var jogoService: JogoService
+    lateinit var db: AppDatabase
+    lateinit var perguntaDao: PerguntaDao
+    lateinit var pontos: ResultadoPontuar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,15 +57,43 @@ class JogoActivity : AppCompatActivity(), ResponderListener {
         configuraRetrofit()
         carregarPerguntas()
 
+//        prefs.edit()
+//            .putInt("pontuacao", pontos.ranking)
+//            .commit()
+
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "pergunta.db"
+        )
+            .allowMainThreadQueries()
+            .build()
+        perguntaDao= db.perguntaDao()
+
+
 
         btLater.setOnClickListener {
+            perguntaInserida(pergunta)
+
+
+//            pontuar(resposta = String.toString())
 
         }
 
+        btRanking.setOnClickListener {
+            val intentExplicita = Intent(this@JogoActivity, RankingActivity::class.java)
+            startActivity(intentExplicita)
+        }
+
+        btRecuperar.setOnClickListener{
+
+        }
 
     }
 
+    @SuppressLint("NewApi")
     private fun carregarPerguntas() {
+//        val country = resources.configuration.locales[0].country.toLowerCase() // "br" "ar"
 
         perguntaService.buscaPerguntas(dificuldade, categoriaId).enqueue(object : Callback<ResultadoPergunta> {
             override fun onFailure(call: Call<ResultadoPergunta>, t: Throwable) {
@@ -64,7 +102,7 @@ class JogoActivity : AppCompatActivity(), ResponderListener {
 
             override fun onResponse(call: Call<ResultadoPergunta>, response: Response<ResultadoPergunta>) {
                 pergunta = response.body()?.perguntas!![0]
-                txtPergunta.text = pergunta.questao
+                txtPergunta.text = Html.fromHtml(pergunta.questao)
                 configuraRecyclerView(pergunta)
                 tempo()
             }
@@ -119,22 +157,13 @@ class JogoActivity : AppCompatActivity(), ResponderListener {
         )
     }
 
-//    fun anInt(anInt: Int){
-//        ListResposta.setOnClickListener {
-//            if (resposta == pergunta.respostaCorreta) {
-//                if (pergunta.dificuldade == "hard") {
-//
-//                } else if (pergunta.dificuldade == "medium"){
-//
-//                } else if (pergunta.dificuldade == "easy"){
-//
-//                }
-//            } else {
-//
-//            }
-//        }
-//
-//    }
+
+    override fun perguntaInserida(pergunta: Pergunta) {
+            perguntaDao.inserir(pergunta)
+        }
+
+
+
 
     override fun pontuar(resposta: String) {
 
@@ -177,7 +206,7 @@ class JogoActivity : AppCompatActivity(), ResponderListener {
             }
 
             override fun onResponse(call: Call<ResultadoPontuar>, response: Response<ResultadoPontuar>) {
-                val pontuacao = response.body()?.pontuacao
+                val pontuacao = response.body()?.ranking
 
             }
         })

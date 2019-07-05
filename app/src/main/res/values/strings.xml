@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tca</string>
+    <string name="app_name">Quizzzz</string>
     <string name="login">Login</string>
     <string name="user">User</string>
     <string name="pass">Password</string>
@@ -9,4 +9,5 @@
     <string name="rbDificil">Hard</string>
     <string name="time_remaining">Time remaining: %1$d</string>
     <string name="btLater">Reply later</string>
+    <string name="cadastre">Or register by clicking here</string>
 </resources>

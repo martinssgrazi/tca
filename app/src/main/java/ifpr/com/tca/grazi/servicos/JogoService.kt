@@ -25,10 +25,9 @@ interface JogoService {
         @Field("senha") senha: String): Call<ResultadoLogin>
 
 
-//    @Headers("Accept: application/json")
-//    @FormUrlEncoded
-//    @GET("ranking.php")
-//    fun ranking(): Call<ResultadoPontuar>
+    @Headers("Accept: application/json")
+    @GET("ranking")
+    fun ranking(): Call<ResultadoPontuar>
 
     @Headers("Accept: application/json")
     @FormUrlEncoded

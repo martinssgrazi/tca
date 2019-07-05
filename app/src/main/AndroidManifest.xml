@@ -13,6 +13,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".RankingActivity">
+        </activity>
         <activity android:name=".JogoActivity">
         </activity>
         <activity android:name=".RegistroActivity">

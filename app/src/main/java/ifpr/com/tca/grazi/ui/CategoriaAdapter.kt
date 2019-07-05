@@ -3,6 +3,7 @@ package ifpr.com.tca.grazi.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import ifpr.com.tca.grazi.R
 import ifpr.com.tca.grazi.entidades.Categoria
@@ -36,8 +37,19 @@ class CategoriaAdapter(
             itemView.setOnClickListener {
                 with(this@CategoriaAdapter) {
                     listener.categoriaSelecionada(categoria)
+
+
+
+
                 }
 
+            }
+            itemView.txtCategoria.setOnClickListener {
+                itemView.txtCategoria.setBackgroundColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.btLogin
+                ))
             }
 
         }

@@ -31,42 +31,50 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("ApplySharedPref")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        configuraRetrofit()
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-
-        btLogin.setOnClickListener {
-
-            val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-            prefs.edit()
-                .putString("usuario", "")
-                .putString("senha", "")
-                .commit()
+        if (prefs.contains("usuario")) {
+            val intentExplicita = Intent(this@MainActivity, ConfigActivity::class.java)
+            startActivity(intentExplicita)
+        } else {
+            setContentView(R.layout.activity_main)
+            configuraRetrofit()
 
 
-            jogoService.login(plainLogin.text.toString(), plainSenha.text.toString()).enqueue(object : Callback<ResultadoLogin> {
-                override fun onFailure(call: Call<ResultadoLogin>, t: Throwable) {
-                    Log.e("grazi", t.message, t)
-                }
-
-                override fun onResponse(call: Call<ResultadoLogin>, response: Response<ResultadoLogin>) {
-                    val resultadoLogin = response?.body()!!
-                    if (resultadoLogin.sucesso) {
-                        val intentExplicita = Intent(this@MainActivity, ConfigActivity::class.java)
-                        startActivity(intentExplicita)
+            btLogin.setOnClickListener {
 
 
-                    } else {
-                        toast("E-mail ou senha inválido")
-                    }
-                }
-            })
-        }
+                prefs.edit()
+                    .putString("usuario", "")
+                    .putString("senha", "")
+                    .commit()
 
-        textView3.setOnClickListener {
-            val intentExplicita2 = Intent(this, RegistroActivity::class.java)
-            startActivity(intentExplicita2)
+
+                jogoService.login(plainLogin.text.toString(), plainSenha.text.toString())
+                    .enqueue(object : Callback<ResultadoLogin> {
+                        override fun onFailure(call: Call<ResultadoLogin>, t: Throwable) {
+                            Log.e("grazi", t.message, t)
+                        }
+
+                        override fun onResponse(call: Call<ResultadoLogin>, response: Response<ResultadoLogin>) {
+                            val resultadoLogin = response?.body()!!
+                            if (resultadoLogin.sucesso) {
+                                val intentExplicita = Intent(this@MainActivity, ConfigActivity::class.java)
+                                startActivity(intentExplicita)
+
+
+                            } else {
+                                toast("E-mail ou senha inválido")
+                            }
+                        }
+                    })
+            }
+
+            textView3.setOnClickListener {
+                val intentExplicita2 = Intent(this, RegistroActivity::class.java)
+                startActivity(intentExplicita2)
+            }
         }
     }
 
